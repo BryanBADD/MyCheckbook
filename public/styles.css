@@ -1,0 +1,196 @@
+
+body {
+  background-color: #253885;
+  columns: #fff;
+}
+
+a {
+  color: #000;
+}
+
+input[type="text"] {
+  font-size: .90rem;
+  width: 100%;
+}
+
+.container {
+  margin: 0;
+}
+
+.input-column {
+  padding: 0;
+}
+
+.money-text-box {
+  text-align: right;
+}
+
+.right-align {
+  text-align: right;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.topBorder {
+  border-top: solid 1px;
+  border-color: #d4d5d9;
+}
+
+/* Heading */
+.header {
+  color: white;
+  padding: 20px 10px;
+  vertical-align: bottom;
+}
+
+/* Navigation */
+.navigation {
+  font-size: .75rem;
+  color: ##dce3fa;
+}
+
+.navigation:hover {
+  color: #fff;
+}
+
+.vertical-center {
+ padding-right: 0;
+ padding-left: 0;
+ margin: auto;
+}
+
+/* Transactions */
+
+.accountName {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #000;
+  background-color: #97a9f0;
+  padding: 0;
+  border-bottom: solid 1px;
+  border-color: #000;
+}
+
+.btn-mini {
+  padding: 0;
+}
+
+.column-heading {
+  font-size: .90rem;
+  font-weight: bold;
+  padding: 0;
+  background-color: #97a9f0;
+}
+
+.depositMoney {
+  background-color: green;
+}
+
+.heading-row {
+  padding: 0 10px;
+  background-color: #97a9f0;
+  border-bottom: solid 1px;
+  border-color: #000;
+}
+
+.negative-transaction {
+  color: red;
+  padding: 0;
+}
+
+.newTransactionInput {
+  border: none;
+  width: 100%;
+  font-size: .90rem;
+}
+
+.new-transaction-row {
+  padding: 0;
+}
+
+.spendMoney {
+  background-color: red;
+}
+
+.transaction-icons {
+  margin: auto ;
+}
+
+.transaction-container {
+  padding: 0 10px;
+  background-color: #fff;
+  border-bottom: solid 1px;
+  border-right: solid 1px;
+  border-color: #d4d5d9;
+  font-size: .90rem;
+}
+
+.transaction-detail {
+  padding: 0;
+}
+
+/* Accounts Area */
+.accountsArea {
+  padding-top: 48px;
+}
+
+.accounts-column {
+  padding: 0;
+}
+
+.accountsDetail {
+  font-size: .90rem;
+  padding: 0;
+}
+
+.accountsHeader {
+  font-weight: bold;
+  border-bottom: solid 1px;
+}
+
+.account-link:hover {
+  color: #d4d5d9;
+}
+
+.accountRows {
+  background-color: #fff;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.add-account-btn {
+  margin-left: 30%;
+  color: green;
+}
+
+.add-account-btn:hover {
+  color: #d4d5d9;
+}
+
+.new-account-row {
+  border-bottom: solid 1px;
+  border-color: #000;;
+}
+
+.new-account-input {
+  padding: 0 5px 0 0;
+  border: none;
+  width: 75%;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: white;
+}
+
+/* Media query */
+@media (max-width: 990px) {
+  .new-transaction-text-box {
+    padding-left: 0;
+  }
+}
