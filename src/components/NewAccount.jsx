@@ -17,6 +17,7 @@ function handleChange(event) {
 }
 
 function addNewAccount() {
+    newAccount.startingBalance = parseFloat(newAccount.startingBalance);
     newAccount.currentBalance = parseFloat(newAccount.startingBalance);
     
     props.onAdd(newAccount);

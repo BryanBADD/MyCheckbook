@@ -2,19 +2,17 @@
 import React, { useState } from "react";
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
-let acctBalance = 0;
-
 function newTransaction(props) {
   const [transaction, setTransaction] = useState({
     date: "",
     description: "",
+    account: "",
     amount: "",
     category: "",
     subcategory: "",
-    balance: acctBalance
   })
   
-  function handleChange(event, ) {
+  function handleChange(event) {
     const {name, value} = event.target;
 
     setTransaction(prevTransaction => {
@@ -22,28 +20,21 @@ function newTransaction(props) {
     });
   }
 
-  function handleSpend() {
+  function handleSpend(event) {
     const amount= 0 - transaction.amount;
-    acctBalance = (parseFloat(acctBalance) + parseFloat(amount));
-    transaction.balance = acctBalance;
     transaction.amount = amount;
-    props.onAdd(transaction);
-    setTransaction({
-      date: "",
-      description: "",
-      amount: "",
-      category: "",
-      subcategory: ""
-    })
-    props.onSubmit();
+    sendTransaction();
   }
 
-  function handleDeposit() {
+  function sendTransaction() {
     if (!transaction.category) {transaction.category = "Uncategorized"};
+    transaction.amount = parseFloat(transaction.amount);
+    transaction.account = props.account;
     props.onAdd(transaction);
     setTransaction({
       date: "",
       description: "",
+      account: "",
       amount: "",
       category: "",
       subcategory: ""
@@ -63,14 +54,15 @@ function newTransaction(props) {
 
         <div className="row new-transaction-row">
         <div className="col-lg-2 input-column"></div>
-        <div className="col-lg-8 input-column"><input name="category" onChange={handleChange} className="newTransactionInput" value={transaction.category} type="text" placeholder="Category"/></div>
+        <div className="col-lg-5 input-column"><input name="category" onChange={handleChange} className="newTransactionInput" value={transaction.category} type="text" placeholder="Category"/></div>
+        <div className="col-lg-5 input-column"><input name="subcategory" onChange={handleChange} className="newTransactionInput" value={transaction.subcategory} type="text" placeholder="SubCategory"/></div>
         </div>
     </div>
 
     <div className="col-lg-2 input-column transaction-icons">
         <div className="row">
-          <div className="col-lg-6 input-column right-align"><button title="Deposit Money" className="btn btn-xs btn-mini btn-outline-success" onClick={handleDeposit} id="spend"><AttachMoneyIcon /></button></div>
-          <div className="col-lg-6 input-column right-align"><button title="Spend Money" className="btn btn-xs btn-mini btn-outline-danger" onClick={handleSpend} id="deposit"><AttachMoneyIcon /></button></div>
+          <div className="col-lg-6 input-column right-align"><button title="Deposit Money" className="btn btn-xs btn-mini btn-outline-success" onClick={sendTransaction} id="deposit"><AttachMoneyIcon /></button></div>
+          <div className="col-lg-6 input-column right-align"><button title="Spend Money" className="btn btn-xs btn-mini btn-outline-danger" onClick={handleSpend} id="spend"><AttachMoneyIcon /></button></div>
         </div>
       </div>
     </div>

@@ -6,8 +6,7 @@ import Accounts from "./Accounts";
 import NewTransaction from "./NewTransaction";
 import TransactionHeading from "./TransactionHeadings";
 import NewAccount from "./NewAccount";
-
-
+let runningBalance = 0;
 
 function App() {
   
@@ -17,6 +16,7 @@ function App() {
   const [accounts, setAccounts] = useState([]);
   const [accountName, setAccountName] = useState("");
   const [filteredTransactions, setFilteredTransactions] = useState([]);
+  
 
   function addingAccount() {
     setIsAddingAccount(!isAddingAccount);
@@ -27,8 +27,9 @@ function App() {
   }
 
   function addAccount(newAccount) {
+    accounts.push(newAccount);
     setAccounts(prevAccounts => {
-      return [...prevAccounts, newAccount];})
+      return [...prevAccounts];});
     setAccountName(newAccount.name);
     changeAccount(newAccount.name);
     }
@@ -42,9 +43,13 @@ function App() {
   }
 
   function addTransaction(newTransaction) {
+    Transactions.push(newTransaction);
     setTransactions(prevTransactions => {
-      return [...prevTransactions, newTransaction];
+      return [...prevTransactions];
     });
+    const currentAccount = accounts.filter(account => account.name === newTransaction.account);
+    currentAccount[0].currentBalance =  parseFloat(currentAccount[0].currentBalance) + parseFloat(newTransaction.amount);
+    changeAccount(newTransaction.account);
   }
 
   function deleteTransaction(id) {
@@ -62,13 +67,16 @@ function App() {
       })
     })
   }
+  
 
   function changeAccount(clickedAccountName) {
-    // const currentAccount = accounts.filter(ledger => ledger.name === clickedAccountName);
-    // runningBalance = parseFloat(currentAccount.startingBalance);
-    const newFilteredTransactions = Transactions.filter(transaction => transaction.account === clickedAccountName);
     setAccountName(clickedAccountName);
+    const currentAccount = accounts.filter(account => account.name === clickedAccountName);
+    runningBalance = parseFloat(currentAccount[0].currentBalance);
+    const newFilteredTransactions = Transactions.filter(transaction => transaction.account === clickedAccountName);
     setFilteredTransactions(newFilteredTransactions);
+    console.log(newFilteredTransactions, runningBalance);
+    
   }
 
 return (
@@ -76,9 +84,10 @@ return (
       <Header onAdd={addingTransaction}/>
       <div className="container">
         <div className="row">
+          {accounts.length > 0 && 
           <div className="col-lg-8 transaction-column">
             <div className="row accountName">
-              <div className="col-lg-6 ">Checking Account</div>
+              <div className="col-lg-6 ">{accountName} Account</div>
               <div className="col-lg-6 vertical-center"><p className="navigation vertical-center" onClick={addingTransaction}>Add Transaction</p></div>
             </div> 
               <TransactionHeading />
@@ -88,21 +97,23 @@ return (
                 onSubmit={resetIsAddingTransaction}
               />}
               {filteredTransactions.map((transaction, index) => {
-                // runningBalance = parseFloat(runningBalance) + parseFloat(transaction.amount);
                 return (
-                  <Transaction
+                <Transaction
                     key={index}
                     id={index}
                     date={transaction.date}
                     description={transaction.description}
+                    account={accountName}
                     amount={transaction.amount}
                     category={transaction.category}
-                    balance={transaction.balance}
+                    subcategory={transaction.subcategory}
+                    balance={runningBalance}
                     onAdd={addTransaction}
                     onDelete={deleteTransaction}
-                  />)})}
+                />)})}
             </div>
-
+           }
+            
             <div className="col-lg-4 accounts-column">
               <div className="row accountName">
                 <div className="col-lg-6 ">Accounts</div>
@@ -125,6 +136,7 @@ return (
                     startingBalance={account.startingBalance}
                     currentBalance={account.currentBalance}
                     onAdd={addTransaction}
+                    onClick={changeAccount}
                     onDelete={deleteAccount}
                   />)})}
               
