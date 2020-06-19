@@ -1,10 +1,13 @@
 {
     "folders": [
         {
-            "path": "../../MyFitnessApp"
+            "path": ".."
         },
         {
-            "path": ".."
+            "path": "../../../Web Development Boot Camp/todolist-v1"
+        },
+        {
+            "path": "../../MyFitnessApp"
         }
     ]
 }
